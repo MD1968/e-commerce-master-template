@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+{% block content %}
+    <form method="post" action="{% url 'register' %}" class="accountform center">
+        <fieldset class="form-group">
+            <h3>Create a new account</h3>
+            <p>Already got an account? <a href="{% url 'login' %}">Sign In</a></p>
+            {% csrf_token %}
+            {{  user_form | as_bootstrap }}
+            <button type="submit" class="btn btn-outline-success">Create account</button>
+        </fieldset>
+    </form>
+{% endblock %}

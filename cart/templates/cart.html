@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load bootstrap_tags %}
+
+{% block page_title %} TopTech | Cart {% endblock %}
+
+{% block page_heading %}
+<h1 class=" heading text-center cart-bottom">Review your shopping cart</h1>
+<hr />
+{% endblock %}
+
+{% block content %}
+
+<!-------------------------- Heading --------------------------->
+<div class="row">
+    <div class="container">     
+        <h1>Order Summary</h1>
+        {% if product_count > 0 %}
+        <h3>You have selected {{ product_count }} {% if product_count > 0 %} items {% else %} Sorry your cart is empty.{% endif %}</h3>
+        {% endif %}
+        <hr>
+    </div>
+</div>
+
+
+<div class="row">
+    {% if product_count == 0  %}
+    <div class="col-sm-12 text-center">
+        <i class="fas fa-shopping-cart empty-cart"></i>
+    </div>
+    <!--/column-->
+    <div class="col-sm-12 text-center no-results">
+        <p>Your cart is currently empty</p>
+    </div>
+    <!--/column-->
+    <div class="col-sm-6 offset-sm-3 text-center">
+        <a href="{% url 'index' %}">
+            <button type="button" class="btn btn-sm btn-outline-success cart">Return to Shopping</button>
+        </a>
+    </div>
+    <!--/column-->
+    {% else %}
+    {% for item in cart_items %}
+
+
+    <!-- start of products -->
+    <div class="col-sm-12 col-md-6 col-lg-3">
+        <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ item.product.image}}')"></div>
+    </div>
+    <!--/column-->
+    <div class="col-sm-12 col-md-6 col-lg-3">
+        <div class="align">
+            <p class="product-description">{{ item.product.name }}</p>
+        </div>
+    </div>
+    <!--/column-->
+    <div class="col-sm-12 col-md-6 col-lg-3">
+        <form class="form-inline align justify-content-center" method="post" action="{% url 'adjust_cart' item.id %}">
+            {% csrf_token %}
+            <div class="input-group-addon">Qty&nbsp;</div>
+            <input name="quantity" type="number" min="0" max="999" required value="{{item.quantity }}"
+                class="form-control input-width">
+            <button type="submit" class="btn btn-outline-success"><i class="fas fa-sync-alt"></i></button>
+        </form>
+        <!--/form-->
+    </div>
+    <!--/column-->
+    <div class="col-sm-12 col-md-6 col-lg-3 align">
+        <span class="product-space">
+                <p class="price-space">{{ item.quantity }} x <i class="pound fas fa-pound-sign">{{ item.product.price }}</i></p>
+            <a href="{% url 'remove_product' item.id %}" class="btn btn-danger" role="button"><i
+                    class="fas fa-trash"></i></a>
+        </span>
+    </div>
+<!-- end of products -->
+
+
+
+    {% endfor %}
+</div>
+<!--/row-->
+<hr />
+<div class="row summary">
+    <div class="col-sm-12 text-md-right text-sm-right">
+        <p>Total</p>
+        <i class="pound fas fa-pound-sign">{{ total }}</i>
+       
+    </div>
+</div>
+<!--/row summary-->
+<div class="clearfix"></div>
+<div class="row cart-nav-bottom">
+    <div class="col-sm-12">
+        <a href="{% url 'index' %}" class="btn btn-outline-success" role="button"><i class="fas fa-arrow-circle-left"></i>
+            Shopping</a>
+        <a href="{% url 'checkout' %}" class="btn btn-outline-success right" role="button"> Checkout <i
+                class="fas fa-arrow-circle-right"></i></a>
+    </div>
+    <!--/column-->
+</div>
+<!--/row cart-nav-->
+{% endif %}
+{% endblock %}
