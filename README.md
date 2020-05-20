@@ -1,4 +1,4 @@
-## Silverheath Phones
+## Silverheath Limited
 
-### My first full e-commerce web app.
+### My E-Commerce Master Template
 
