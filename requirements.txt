@@ -1,6 +1,6 @@
 boto3==1.13.16
 botocore==1.16.16
-chardet==2.2.1
+chardet==3.0.4
 colorama==0.2.7
 dj-database-url==0.5.0
 Django==1.11.29
@@ -16,3 +16,4 @@ psycopg2==2.8.5
 pytz==2017.3
 s3transfer==0.3.3
 six==1.5.2
+stripe==2.48.0
