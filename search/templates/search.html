@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% load bootstrap_tags %}
+
+{% block page_title %} Silverheath Phones | Search {% endblock %}
+
+{% block page_heading %}
+<h1 class="heading home-title">Search results: </h1>
+<hr />
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for product in products %}
+    <div class="col-sm-12 col-md-4 col-lg-3">
+        <a href="{% url 'detail' product.id %}">
+            <div class="card text-center">
+                <img class="card-img-top" src="/media/{{ product.image }}" alt=" {{ product.name}} image" />
+                <div class="card-body text-center">
+                    <p class="product-name">{{ product.name }}</p>
+                    <span class="product-price"><i class="fas fa-euro-sign"></i> {{ product.price }}</span>
+                </div>
+            </div>
+            <!--/card-->
+        </a>
+    </div>
+    <!--/column-->
+    {% empty %}
+    <div class="col-sm-12 text-center">
+        <i class="fas fa-search empty-cart"></i>
+    </div>
+    <!--/column-->
+    <div class="col-sm-12">
+        <div class="no-results text-center">
+            <p><span>Oops</span>, we didn't find any results :(<br /> Please try other
+                keyword...</p>
+        </div>
+        <!--/column-->
+    </div>
+    <!--/column-->
+    {% endfor %}
+</div>
+<!--/row-->
+{% endblock %}
