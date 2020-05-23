@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('C9_HOSTNAME'), '127.0.0.1', '8000-c5489b6f-391a-49c2-a0d0-cd1d25162843.ws-eu01.gitpod.io']
+ALLOWED_HOSTS = [os.environ.get('C9_HOSTNAME'), '127.0.0.1', '8000-c5489b6f-391a-49c2-a0d0-cd1d25162843.ws-eu01.gitpod.io', 'silverheath-phones.herokuapp.com']
 
 
 # Application definition
