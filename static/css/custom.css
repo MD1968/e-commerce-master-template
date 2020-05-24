@@ -19,6 +19,8 @@ h1 {
   text-transform: uppercase;
 }
 
+
+
 h3 {
   font-size: 1.3rem;
   font-weight: bold;
@@ -30,6 +32,7 @@ h4 {
   font-size: 1.3rem;
   font-weight: bold;
   text-align: center;
+  color: #007FFF;
 }
 
 a:hover {
