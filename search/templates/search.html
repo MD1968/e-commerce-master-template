@@ -1,44 +1,31 @@
-{% extends "base.html" %}
-{% load static from staticfiles %}
-{% load bootstrap_tags %}
-
-{% block page_title %} TopTech | Search {% endblock %}
-
-{% block page_heading %}
-<h1 class="heading home-title">Search results: </h1>
-<hr />
-{% endblock %}
-
+{% extends 'base.html' %}
 {% block content %}
-<div class="row">
+
+<div class="row row-flex">
     {% for product in products %}
-    <div class="col-sm-12 col-md-4 col-lg-3">
-        <a href="{% url 'detail' product.id %}">
-            <div class="card text-center">
-                <img class="card-img-top" src="/media/{{ product.image }}" alt=" {{ product.name}} image" />
-                <div class="card-body text-center">
-                    <p class="product-name">{{ product.name }}</p>
-                    <span class="product-price"><i class="fas fa-euro-sign"></i> {{ product.price }}</span>
-                </div>
+        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
+        <div class="panel-body">
+         <div class="product-image">
+                <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
             </div>
-            <!--/card-->
-        </a>
-    </div>
-    <!--/column-->
-    {% empty %}
-    <div class="col-sm-12 text-center">
-        <i class="fas fa-search empty-cart"></i>
-    </div>
-    <!--/column-->
-    <div class="col-sm-12">
-        <div class="no-results text-center">
-            <p><span>Oops</span>, we didn't find any results :(<br /> Please try other
-                keyword...</p>
+                <h3>{{ product.name }}</h3>
+                <p class="product-description">{{ product.description }}</p>
+
+            
+                <h3><i class="product-price fas fa-pound-sign">{{ product.price }}</i></h3>
+
+                <form method="post" action="{% url 'add_to_cart' product.id %}">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input name="quantity" type="number" min="1" max="999" class="form-control" placeholder="Quantity">
+                        <span class="input-group-btn">
+                            <button class=" btn btn-outline-success" type="submit">Add</button>
+                        </span>
+                    </div>
+
+                </form>
+            </div>
         </div>
-        <!--/column-->
-    </div>
-    <!--/column-->
     {% endfor %}
-</div>
-<!--/row-->
+
 {% endblock %}
