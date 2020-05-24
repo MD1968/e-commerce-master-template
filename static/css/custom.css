@@ -67,6 +67,7 @@ footer p {
 
 .copyrighttext {
     color: blue;
+    text-align: center;
 }
 .mobile {
   display: inline-block !important;
