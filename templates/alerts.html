@@ -1,0 +1,9 @@
+{% if messages %}
+    <div class="col-xs-12 col-xs-offset+1">
+        <div class="alert-message center">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

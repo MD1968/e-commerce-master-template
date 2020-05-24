@@ -27,53 +27,32 @@
 </head>
 
 <body>
-    <!-- Body Inner -->
+<!-- Body Inner -->
     <div class="body-inner">
 
-    <!-- Navbar Start -->
+<!-- Navbar Start -->
+    {% include 'navbar.html' %} 
+<!-- Navbar End -->
 
-{% include 'navbar.html' %} 
-      
-      <!-- Navbar End -->
-      
-    {% if messages %}
+<!-- Alerts Start -->
+{% include 'alerts.html' %} 
+<!-- Alerts End-->
 
-          <div class="col-xs-12 col-xs-offset+1">
-                <div class="alert-message center">
-                   
-                        {% for message in messages %}
-                         {{ message }}
-                        {% endfor %}
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    {% endif %}
+<!-- Main content start -->
     <div class="container">
-        <div class="display">
-            
-        </div>
         {% block content %} {% endblock %}
     </div>
-      <!--/container main-->
+<!-- Main content start -->
 
-      <!-- Include Footer -->
+<!-- Start Footer -->
   {% include 'footer.html' %}
+<!-- End Footer -->
 
-
-
-
-<!-- end: Footer -->
- <!-- end: Body Inner -->
-
-          <!-- Scroll top -->
+<!-- Scroll top -->
     <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
     <!--Plugins-->
  
+    </div>
 </body>
 
 </html>
