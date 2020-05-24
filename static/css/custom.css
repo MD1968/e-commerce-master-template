@@ -28,3 +28,8 @@
 .custom-height-form {
     height: 35px;
 }
+
+.navbar-custom .navbar-brand, 
+.navbar-custom .navbar-text { 
+    color: green; 
+} 
