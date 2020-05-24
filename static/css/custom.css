@@ -1,2 +1,21 @@
 /* Custom Styles */
 
+.footer {
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #3B5998;
+    color: white;
+    text-align: center;
+}
+
+h4 {
+    color: white;
+}
+
+.bg-dark  {
+    background-color: #3B5998;
+    color: white;
+}
+
+
