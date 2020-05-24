@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row row-flex">
+    {% for product in products %}
+
+    <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4">
+
+        <div class="card">
+            <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
+            <hr>
+            <div class="container">
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-description">
+                    {{ product.description|truncatewords:15 }}
+                </p>
+                <p class="product-name"><a href="{% url 'product_detail' product.id %}" class="btn btn-link">More
+                        Details</a></p>
+                <p>€{{ product.price }}</p>
+            </div>
+
+            <div class="container">
+                <form class="inform" method="post" action="{% url 'add_to_cart' product.id %}">
+                    {% csrf_token %}
+                    {% if product.stock > 0 and product.cart_stock > 0 %}
+                    <div class="input-group">
+                        <input name="quantity" type="number" min="1" max="999" class="form-control" value="1">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="submit">Add</button>
+                        </span>
+                        {% else %}
+                        <div class="input-group">
+                            <input name="quantity" type="number" min="1" max="999" class="form-control"
+                                placeholder="Out of Stock" disabled>
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="submit" disabled>Add</button>
+                            </span>
+                        </div>
+                    </div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<br>
+<div class="row">
+    <div class="col-12 justify-content-center pagination">
+        <span class="step-links">
+            {% if products.has_previous %}
+            <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo; first</a>
+            <a
+                href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ products.number }} of {{ products.paginator.num_pages }}.
+            </span>
+
+            {% if products.has_next %}
+            <a
+                href="?page={{ products.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+            <a href="?page={{ products.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">last
+                &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}
