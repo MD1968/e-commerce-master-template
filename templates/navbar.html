@@ -1,59 +1,79 @@
-  <!-- Header -->
-     
-  <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar"></nav>      
-         <div class="container">
-            <a class="navbar-brand" href="{% url 'index' %}">Silverheath Phones</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home"></i> Home <span
-                                class="sr-only">(current)</span></a>
-                    </li>
-                </ul>
-                <!--/ul-->
-                <form class="form-inline justify-content-center d-none d-md-none d-lg-block" action="{% url 'search' %}"
-                    method="get">
-                    <input type="text" name="q" class="form-control" placeholder="Enter keyword...">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <!--/form-->
-                <ul class="navbar-nav ml-auto">
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}"><i class="fas fa-user-plus"></i>
-                            Register</a>
-                    </li>
-                    {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'view_cart' %}"><i class="fas fa-shopping-cart"></i> Cart
-                            {% if product_count > 0 %}
-                            <label class="badge badge-warning">{{ product_count }}</label>
-                            {% endif %}
-                        </a>
-                    </li>
-                </ul>
-                <!--/ul-->
-                <form action="{% url 'search' %}" method="get" class="d-block d-md-block d-lg-none form-inline">
-                    <input type="text" name="q" class="form-control mobile" placeholder="Enter keyword...">
-                    <button class=" btn btn-outline-success my-2 my-sm-2" id="search-button"
-                        type="submit">Search</button>
-                </form>
-                <!--/form-->
-            </div>
-            <!--/collapse navbar-collapse-->
-        </div>
-        </div>  
-        <!--/container-->
-    </nav>
-</header>
+{% load cart_template_tags %} {% load static %}
+
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+  <div class="container">
+
+    <!-- Collapse -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Left -->
+
+      <ul class="navbar-nav navbar-left mr-auto">
+        <!-- Brand -->
+        <li>
+          <a class="navbar-brand waves-effect" href="{% url 'home' %}">
+          <strong>Wedding Planner</strong>
+        </a>
+        </li>
+        <li>
+          <img class="logo-image" src="{% static 'img/logo.jpg' %}" alt="brand-logo">
+        </li>
+      </ul>
+
+      <!-- Right -->
+      <ul class="navbar-nav nav-flex-icons">
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'home' %}"><i class="fas fa-home"></i><span class = "no-display-mobile">Home</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'post_list' %}"><i class="fa fa-comments"></i><span class = "no-display-mobile">Forum</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'contact' %}"><i class="fas fa-envelope"></i><span class = "no-display-mobile">Contact</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'request_refund' %}"><i class="fas fa-money-bill-alt"></i><span class = "no-display-mobile">Refund</span></a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'profile' %}"><i class="fa fa-user"></i><span class = "no-display-mobile">Profile</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'logout' %}"><i class="fa fa-sign-out-alt"></i><span class = "no-display-mobile">Logout</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'charts' %}"><i class="fas fa-chart-line"></i><span class = "no-display-mobile">Charts</span></a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'order_summary' %}" class="nav-link waves-effect">
+              <span class="badge red z-depth-1 mr-1">
+                {% if request.user|cart_item_count == None %}
+                0
+                {% else %}
+                {{ request.user|cart_item_count }}
+                {% endif %}
+              </span>
+              <i class="fas fa-shopping-cart"></i>
+              <span class="clearfix no-display-mobile d-none d-sm-inline-block"> Cart </span>
+            </a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'login' %}"><i class="fa fa-sign-in-alt"></i><span class = "no-display-mobile">Login</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'registration' %}"><i class="fa fa-user-plus"></i><span class = "no-display-mobile">Register</span></a>
+        </li>
+        {% endif %}
+      </ul>
+
+    </div>
+
+  </div>
+</nav>
