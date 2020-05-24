@@ -45,13 +45,6 @@
                                 class="sr-only">(current)</span></a>
                     </li>
                 </ul>
-                <!--/ul-->
-                <form class="form-inline justify-content-center d-none d-md-none d-lg-block" action="{% url 'search' %}"
-                    method="get">
-                    <input type="text" name="q" class="form-control" placeholder="Enter keyword...">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <!--/form-->
                 <ul class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
