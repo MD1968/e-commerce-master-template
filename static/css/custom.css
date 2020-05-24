@@ -54,7 +54,7 @@ a:hover {
   padding: 10px;
 } 
 
-footer {
+.footer {
   background-color: #343a40;
   color: blue;
   padding: 2rem 1rem;
@@ -62,16 +62,7 @@ footer {
   width: 100%;
 }
 
-footer p {
-  color:  blue; 
-  margin: 0;
-  text-align: center;
-}
 
-.copyrighttext {
-    color: blue;
-    text-align: center;
-}
 .mobile {
   display: inline-block !important;
   width: 75%;
