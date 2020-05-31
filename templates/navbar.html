@@ -1,5 +1,5 @@
  <!-- Header -->
- <nav class="navbar navbar-expand-lg navbar-dark bg-darks fixed-top">
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="{% url 'index' %}">Silverheath Phones</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -19,6 +19,12 @@
             </form>
             <!--/form-->
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href=""><i class="fas fa-sign-out-alt"></i>About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{}"><i class="fas fa-sign-out-alt"></i>Contact</a>
+                </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
