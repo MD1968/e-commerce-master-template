@@ -1,0 +1,60 @@
+ <!-- Header -->
+ <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="{% url 'index' %}">Silverheath Phones</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                </li>
+            </ul>
+            <!--/ul-->
+            <form class="form-inline justify-content-center d-none d-md-none d-lg-block" action="{% url 'search' %}"
+                method="get">
+                <input type="text" name="q" class="form-control" placeholder="Enter keyword...">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <!--/form-->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href=""><i class="fas fa-sign-out-alt"></i>About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{}"><i class="fas fa-sign-out-alt"></i>Contact</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}"><i class="fas fa-user-plus"></i>
+                        Register</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'view_cart' %}"><i class="fas fa-shopping-cart"></i> Cart
+                        {% if product_count > 0 %}
+                        <label class="badge badge-warning">{{ product_count }}</label>
+                        {% endif %}
+                    </a>
+                </li>
+            </ul>
+            <!--/ul-->
+            <form action="{% url 'search' %}" method="get" class="d-block d-md-block d-lg-none form-inline">
+                <input type="text" name="q" class="form-control mobile" placeholder="Enter keyword...">
+                <button class=" btn btn-outline-success my-2 my-sm-2" id="search-button"
+                    type="submit">Search</button>
+            </form>
+            <!--/form-->
+        </div>
+        <!--/collapse navbar-collapse-->
+    </div>
+    <!--/container-->
+</nav>
+<!--/nav-->
