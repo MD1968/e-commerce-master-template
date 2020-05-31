@@ -4,7 +4,8 @@
 /****************** Navigation ******************/
 .navbar-custom .navbar-brand, 
 .navbar-custom .navbar-text { 
-    color: green; 
+    background-color: green; 
+    color: white;
 } 
   /********************* Body *********************/
 
